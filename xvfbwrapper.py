@@ -11,9 +11,8 @@ import os
 import subprocess
 import tempfile
 import time
-
-from random import randint
 from errno import EACCES
+import secrets
 
 PY2 = False
 try:
@@ -155,7 +154,7 @@ class Xvfb(object):
         :return: free display number
         '''
         while True:
-            rand = randint(1, self.__class__.MAX_DISPLAY)
+            rand = secrets.SystemRandom().randint(1, self.__class__.MAX_DISPLAY)
             if self._get_lock_for_display(rand):
                 return rand
             else:
