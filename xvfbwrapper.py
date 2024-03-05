@@ -14,6 +14,7 @@ import time
 
 from random import randint
 from errno import EACCES
+from security import safe_command
 
 PY2 = False
 try:
@@ -73,7 +74,7 @@ class Xvfb(object):
         display_var = ':{}'.format(self.new_display)
         self.xvfb_cmd = ['Xvfb', display_var] + self.extra_xvfb_args
         with open(os.devnull, 'w') as fnull:
-            self.proc = subprocess.Popen(self.xvfb_cmd,
+            self.proc = safe_command.run(subprocess.Popen, self.xvfb_cmd,
                                          stdout=fnull,
                                          stderr=fnull,
                                          close_fds=True)
