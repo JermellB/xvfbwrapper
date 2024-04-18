@@ -17,7 +17,7 @@ from errno import EACCES
 
 PY2 = False
 try:
-    BlockingIOError
+    raise BlockingIOError
 except NameError:
     # python 2
     BlockingIOError = IOError
